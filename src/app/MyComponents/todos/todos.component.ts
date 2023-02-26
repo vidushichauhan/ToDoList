@@ -26,7 +26,7 @@ export class TodosComponent {
 
     },
     {
-      sno : 2,
+      sno : 1,
       title : 'This is title',
       desc : "Description",
       active : true
@@ -39,6 +39,17 @@ export class TodosComponent {
   ngOnInit() : void { 
 
   }
+  deleteToDo(todo: Todo){
+    console.log(todo);
+    const index = this.todos.indexOf(todo);
 
+    this.todos.splice(index,1);
+  }
+
+  todoAdd(todo: Todo){
+    console.log(todo);
+    this.todos.push(todo);
+
+  }
 
 }
