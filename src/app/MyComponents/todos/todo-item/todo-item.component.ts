@@ -12,10 +12,16 @@ export class TodoItemComponent {
   
   @Output()
   todoDelete: EventEmitter<Todo > = new EventEmitter();
+  @Output()
+  todocheckbox: EventEmitter<Todo > = new EventEmitter();
 
   onClick(todo : Todo){
     this.todoDelete.emit(todo);
     console.log("onClick has been traced")
   }
 
+
+  onCheckboxClick(todo: any){
+    this.todocheckbox.emit(todo);
+  }
 }

@@ -7,49 +7,35 @@ import { Todo } from "../../todo"
   styleUrls: ['./todos.component.css']
 })
 export class TodosComponent {
-   
+  localItem: string;
   todos!: Todo[];
-  constructor(){
-   this.todos = [
-    {
-      sno : 3,
-      title : 'This is title',
-      desc : "Description",
-      active : true
-
-    },
-    {
-      sno : 2,
-      title : 'This is title',
-      desc : "Description",
-      active : true
-
-    },
-    {
-      sno : 1,
-      title : 'This is title',
-      desc : "Description",
-      active : true
-
+  constructor() {
+    
+    this.localItem =localStorage.getItem("todos") || '{}';
+    if(this.localItem == null){
+      this.todos=[];
     }
-   ]
+    else{
+      this.todos = JSON.parse(this.localItem);
+    }
 
   }
-
-  ngOnInit() : void { 
-
-  }
-  deleteToDo(todo: Todo){
+  deleteToDo(todo: Todo) {
     console.log(todo);
     const index = this.todos.indexOf(todo);
-
-    this.todos.splice(index,1);
+    this.todos.splice(index, 1);
+    localStorage.setItem("todos", JSON.stringify(this.todos));
   }
 
-  todoAdd(todo: Todo){
+  todoAdd(todo: Todo) {
     console.log(todo);
     this.todos.push(todo);
-
+    localStorage.setItem("todos", JSON.stringify(this.todos));
+  }
+  onCheckboxClick(todo: Todo){
+    const index = this.todos.indexOf(todo);
+    this.todos[index].active=!this.todos[index].active;
+    localStorage.setItem("todos", JSON.stringify(this.todos));
   }
 
 }
